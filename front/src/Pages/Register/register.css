@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    background-color: #f4f4f4; 
+  }
+  
+  .form-container {
+    display: flex;
+    align-items: center;
+    width: 70%; /* Ancho del contenedor del formulario */
+    background-color: #ffffff; /* Color de fondo del formulario */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+  
+  .form-container img {
+    width: 50%; /* Ancho de la imagen */
+    height: auto; /* Altura automática para mantener la proporción */
+    margin-right: 20px; /* Margen a la derecha de la imagen */
+  }
+  
+  form {
+    width: 100%; /* Ancho del formulario */
+  }
+  
+  div {
+    margin-bottom: 15px; /* Espacio entre los elementos del formulario */
+  }
+  
+  label {
+    display: block; /* Mostrar etiquetas como bloques */
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%; /* Ancho completo */
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde del input */
+    border-radius: 4px; /* Bordes redondeados */
+  }
+  .btn-submit {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+  

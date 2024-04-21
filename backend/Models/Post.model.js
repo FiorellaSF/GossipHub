@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import publicationSchema from '../Schemas/Publication.schema.js';
+import postSchema from "../Schemas/Posts.schema.js";
+import mongoose from "mongoose";
 
-const Publication = mongoose.model('Publication', publicationSchema);
+const Post = mongoose.model('post', postSchema);
 
-export default Publication;
+export default Post

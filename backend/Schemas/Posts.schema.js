@@ -1,19 +1,22 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
+const {ObjectId} = mongoose.Schema.Types
 
-const publicationSchema = new mongoose.Schema({
-  image: {
-    type: String,
-  },
-  description: {
-    type: String
-  },
-  date: {
-    type: Date,
-    default: Date.now,
-    required: true
-  }
-});
 
-const Publication = mongoose.model('Publication', publicationSchema);
+const postSchema = mongoose.Schema(
+    {
+        description: { type: [String], required: true },
+        image: { type: String, required: true },
+        fileId: { type:String },
+        fileName: { type:String },
 
-module.exports = Publication;
+        // likes:[{type:ObjectId,ref:"User"}],
+        postedBy:{
+            type:ObjectId,
+            ref:"User",
+            required: true
+         }
+    }, 
+    { timestamps: true }
+)
+
+export default postSchema
