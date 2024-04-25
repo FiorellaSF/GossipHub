@@ -28,11 +28,7 @@ const userSchema = mongoose.Schema(
         profileImage: {
             type: String,  // Guardará la URL de la imagen
             default: 'default-image-url.jpg'  // Puedes definir una imagen por defecto
-        },
-        phoneNumber: {
-                type: String,
-                unique: true
-            },
+        }
         
     },
 

@@ -3,21 +3,29 @@ import dotenv from 'dotenv';
 import connectDB from './DataBase/conection.js';
 import authRoutes from './Routes/Auth.routes.js'; // Importa las rutas de autenticación
 import cors from 'cors'; // Importa cors si lo necesitas
+import usersRoute from './Routes/User.routes.js';
 
 dotenv.config();
 
 const app = express();
-
-// Middleware para permitir solicitudes de diferentes orígenes
-app.use(cors());
-
 // Middleware para parsear el cuerpo de las solicitudes JSON
 app.use(express.json());
+// Middleware para permitir solicitudes de diferentes orígenes
+app.use(cors());
+// Rutas de autenticación
+app.use('/auth', authRoutes);
+app.use('/', usersRoute)
+
 
 // Conexión a la base de datos
 connectDB();
 
-// Rutas de autenticación
-app.use('/api/auth', authRoutes);
+
+
+
+const PORT = process.env.PORT ;
+app.listen(PORT, ()=>{
+    console.log(`Conexion en puerto ${PORT},Ok `)
+})
 
 
