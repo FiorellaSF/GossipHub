@@ -30,17 +30,10 @@ const userSchema = mongoose.Schema(
             default: 'default-image-url.jpg'  // Puedes definir una imagen por defecto
         },
         phoneNumber: {
-            prefix: {
                 type: String,
-                required: true
-            },
-            number: {
-                type: String,
-                required: true,
                 unique: true
             },
-            // Opcional: puedes añadir campos adicionales como tipo de teléfono (móvil, fijo), etc.
-        }
+        
     },
 
 

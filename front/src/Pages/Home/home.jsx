@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './home.css';
 import Navbar from '../../Components/NavBar/NavBar';
+import PostList from '../../Components/Posts/PostList';
 
 
 const Home = () => {
@@ -9,8 +10,7 @@ const Home = () => {
   return (
     <main>
         <Navbar/>
-
-<p>Hola</p>  
+<PostList />
     </main>
   );
 }

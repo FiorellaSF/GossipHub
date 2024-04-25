@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 import User from "../Models/auth.model.js";
 import Jwt  from "jsonwebtoken";
 
-//REGISTERS USER
+//REGISTER USER
 export const register = async (req, res) => {
 
     const { uname, email, password } = req.body
@@ -33,7 +33,7 @@ export const register = async (req, res) => {
     }
   };
 
-//LOGINS USER
+//LOGIN USER
 export const login = async (req, res) => {
   try {
     // LOOKS UP FOR THE DATA THAT'S BEING PUT ON THE INPUTS
