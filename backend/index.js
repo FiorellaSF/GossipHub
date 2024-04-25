@@ -16,7 +16,7 @@ app.use(cors());
 // Rutas de autenticación
 app.use('/auth', authRoutes);
 app.use('/', usersRoute)
-app.use('/', postsRoutes)
+app.use('/post', postsRoutes)
 
 // Conexión a la base de datos
 connectDB();

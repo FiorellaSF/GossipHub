@@ -128,7 +128,7 @@ export const deletePost = async (req, res) => {
 //GETS THE POSTS YOU HAVE POSTED
 export const getUserPosts = async (req, res) => {
   try {
-    const userIdToken = req.user._id;
+    const userIdToken = req.params.postedBy;
 
     const userPosts = await Post.find({ postedBy: userIdToken });
 

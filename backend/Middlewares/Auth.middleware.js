@@ -1,12 +1,4 @@
-import crypto from 'crypto';
-
-// Genera un token secreto aleatorio
-const generateTokenSecret = () => {
-    return crypto.randomBytes(64).toString('hex');
-};
-
-// Utiliza la función para obtener el token secreto
-const TOKEN_SECRET = generateTokenSecret();
+import Jwt  from "jsonwebtoken";
 
 // VERIFIES THE TOKEN CAN BE FOUND IN THE HEADER "AUTH-TOKEN"
 const verifyToken = (req, res, next) => {
@@ -14,7 +6,7 @@ const verifyToken = (req, res, next) => {
     if (!token) return res.status(401).json({ message: "Access Denied" });
 
     try {
-        const verified = Jwt.verify(token, TOKEN_SECRET);
+        const verified = Jwt.verify(token, process.env.TOKEN_SECRET);
 
         req.user = verified;
 
