@@ -4,6 +4,7 @@ import connectDB from './DataBase/conection.js';
 import authRoutes from './Routes/Auth.routes.js'; // Importa las rutas de autenticación
 import cors from 'cors'; // Importa cors si lo necesitas
 import usersRoute from './Routes/User.routes.js';
+import postsRoutes from './Routes/Posts.routes.js'
 
 dotenv.config();
 
@@ -15,7 +16,7 @@ app.use(cors());
 // Rutas de autenticación
 app.use('/auth', authRoutes);
 app.use('/', usersRoute)
-
+app.use('/', postsRoutes)
 
 // Conexión a la base de datos
 connectDB();

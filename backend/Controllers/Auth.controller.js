@@ -37,17 +37,12 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   try {
     // LOOKS UP FOR THE DATA THAT'S BEING PUT ON THE INPUTS
-    const { identifier, password } = req.body;
+    const { uname, password } = req.body;
 
-    // Check if identifier is defined and is a string
-    const isEmail = typeof identifier === 'string' && identifier.includes('@');
-
-    const user = isEmail
-      ? await User.findOne({ email: identifier })
-      : await User.findOne({ uname: identifier });
+    const user = await User.findOne({ uname: uname })
 
     if (!user) {
-      return res.status(400).json({ message: 'Incorrect Email or username' });
+      return res.status(400).json({ message: 'Incorrect username' });
     } else {
       const validPassword = await bcrypt.compare(password, user.password);
 
@@ -59,20 +54,18 @@ export const login = async (req, res) => {
     const token = Jwt.sign(
       {
         _id: user._id,
-        username: user.uname,
+        uname: user.uname,
         email: user.email,
+        role: user.role,
       },
       process.env.TOKEN_SECRET
     );
-
-
-
     res.header({
       'auth-token': token,
     });
 
-    res.json({ token });
-  } catch (error) {
+    res.json({ token });} 
+    catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }

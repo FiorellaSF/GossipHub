@@ -9,7 +9,7 @@ router.get('/:id', getSinglePost);
 
 router.get('/username', verifyToken, getUserPosts);
 
-router.post('/post', verifyToken, createPost);
+router.post('/post', createPost);
 
 router.put('/update/:id', verifyToken, updatePost);
 router.put('/image/update/:id', verifyToken, imageUpdate);

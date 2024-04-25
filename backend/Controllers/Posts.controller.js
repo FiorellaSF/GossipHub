@@ -1,4 +1,4 @@
-import Post from "../Models/Posts.model.js";
+import Post from "../Models/Post.model.js";
 
 //GETS ALL POSTS
 export const getAllPosts = async (req, res) => {
@@ -34,23 +34,17 @@ export const getSinglePost = async (req, res) => {
 
 //CREATES A POST
 export const createPost = async (req, res) => {
-  const { description } = req.body;
-  const userId = req.user._id;
+  const  description  = req.body;
 
   try {
-    const fileData = res.locals.data;
 
-    const post = new Post({
-      image: fileData.url,
-      description: [description],
-      postedBy: userId,
-      fileId: fileData.fileId,
-      fileName: fileData.fileOriginalName
-    });
+    const post = new Post(
+      description
+    );
 
-    await post.save();
+   const newPost = await post.save();
 
-    res.status(200).json({ post });
+    res.status(200).json({ newPost });
   } catch (error) {
     res.status(500).json({ error });
   }

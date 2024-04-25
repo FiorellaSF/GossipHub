@@ -4,12 +4,12 @@ const {ObjectId} = mongoose.Schema.Types
 
 const postSchema = mongoose.Schema(
     {
-        description: { type: [String], required: true },
+        description: { type: String, required: true },
         image: { type: String },
-        fileId: { type:String },
-        fileName: { type:String },
+        // fileId: { type:String },
+        // fileName: { type:String },
 
-        // likes:[{type:ObjectId,ref:"User"}],
+        // // likes:[{type:ObjectId,ref:"User"}],
         postedBy:{
             type:ObjectId,
             ref:"User",
