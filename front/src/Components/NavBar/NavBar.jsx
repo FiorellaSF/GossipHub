@@ -20,7 +20,7 @@ const Navbar = () => {
       
         <i className="fa-solid fa-magnifying-glass" onClick={toggleInput}></i>
         {showInput && <input type="text" placeholder="Buscar..." />}
-        <Link to="/register"> <i className="fa-solid fa-user-large"></i></Link> {/* Usar Link para la navegación */}
+        <Link to="/login"> <i className="fa-solid fa-user-large"></i></Link> {/* Usar Link para la navegación */}
       </div>
     </nav>
   );

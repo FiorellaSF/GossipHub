@@ -4,14 +4,14 @@ import verifyToken from '../Middlewares/Auth.middleware.js'
 
 const router = express.Router()
 
-router.get('/', verifyToken, getAllPosts);
+router.get('/', getAllPosts);
 router.get('/:id', getSinglePost);
 
 router.get('/user/:postedBy', getUserPosts);
 
-router.post('/post',  createPost);
+router.post('/post', verifyToken, createPost);
 
-router.put('/update/:id', updatePost);
+router.put('/update/:id', verifyToken, updatePost);
 router.put('/image/update/:id', verifyToken, imageUpdate);
 
 router.delete('/delete/:id', verifyToken, deletePost);

@@ -1,0 +1,20 @@
+.user-profile-navbar {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+  }
+  
+  .profile-image-container {
+    margin-right: 10px; /* Espacio entre la imagen y el nombre de usuario */
+  }
+  
+  .profile-image {
+    width: 60px; /* Tamaño de la imagen */
+    height: 60px;
+    border-radius: 50%; /* Para que la imagen se vea como un círculo */
+  }
+  
+  .username h2 {
+    font-size: 20px; /* Tamaño del nombre de usuario */
+    font-weight: bold; /* Texto en negrita */
+  }
+  

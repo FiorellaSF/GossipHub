@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './PostList.css'
+import './PostList.css';
 
 const PostList = () => {
   const [posts, setPosts] = useState([]);
@@ -9,7 +9,7 @@ const PostList = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('/');
+        const response = await axios.get('http://localhost:5000/post');
         setPosts(response.data);
         setLoading(false);
       } catch (error) {
@@ -21,6 +21,16 @@ const PostList = () => {
     fetchPosts();
   }, []);
 
+  const renderProfileImage = (user) => {
+    return (
+      <img 
+        src={user.profileImage || 'default-image-url.jpg'} 
+        alt={user.uname}
+        style={{ borderRadius: '50%', width: '50px', height: '50px' }}
+      />
+    );
+  };
+
   if (loading) {
     return <p>Loading...</p>;
   }
@@ -31,32 +41,19 @@ const PostList = () => {
         <p>Aún no hay publicaciones</p>
       ) : (
         posts.map(post => (
-          <div key={post._id}>
-            <h3>{post.description[0]}</h3>
-            {post.image && <img src={post.image} alt="Post" />}
+          <div key={post._id} className="post-container">
+            <div className="user-info">
+              {post.postedBy && renderProfileImage(post.postedBy)}
+              <span>{post.postedBy && post.postedBy.uname}</span>
+            </div>
+            <div className="post-content">
+              {post.image && <img src={post.image} alt="Post" />}
+              <p>{post.description}</p>
+            </div>
           </div>
         ))
       )}
-  
-    <section className='posts'>
-    <div class="post">
-        < class=""> 
-        
-        <div class="post-content profile-picture"> 
-             <img src="./spring.png" alt="Foto de perfil"/>
-            <div class="username">
-                <strong>NombreDeUsuario</strong>
-            </div>
-            <div class="image">
-                <img src="./oveja.png" alt="Imagen de la publicación"/>
-            </div>
-            <div class="description">
-                Descripción de la publicación...
-            </div>
-        </div>
-    </div>
-    </section> 
-     </main>
+    </main>
   );
 };
 

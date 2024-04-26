@@ -1,28 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import './login.css';
 
 const Login = () => {
-    const handleSubmit = (e) => {
+    const [uname, setUname] = useState('');  
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate(); 
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Conectar back
+        
+        try {
+            const response = await axios.post('http://localhost:5000/auth/login', {
+                uname,  
+                password
+            });
+
+            // Guardar token en localStorage o cookies
+            localStorage.setItem('token', response.data.token);
+
+            navigate('/profile');  
+        } catch (err) {
+            setError(err.response ? err.response.data.message : 'Error de conexión');
+        }
     };
 
     return (
-        <main className="login-container">
+        <section className="login-container">
             <img src='/oveja.png' alt="Bienvenido" className="oveja" />
             <h2>Bienvenido de nuevo</h2>
+            {error && <p className="error-message">{error}</p>}
             <form onSubmit={handleSubmit} className="login-form">
                 <div className="form-group">
-                    <label htmlFor="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="Correo Electrónico" required />
+                    <label htmlFor="uname">Nombre de usuario</label> 
+                    <input 
+                        type="text"  
+                        id="uname" 
+                        name="uname" 
+                        placeholder="Nombre de usuario"  
+                        value={uname}
+                        onChange={(e) => setUname(e.target.value)}
+                        required 
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Contraseña</label>
-                    <input type="password" id="password" name="password" placeholder="Contraseña" required />
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Contraseña" 
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required 
+                    />
+                </div>
+                <div>
+                    <Link to="/register">¿Todavía no tienes cuenta? Únete</Link>
                 </div>
                 <button type="submit" className="btn-submit">Iniciar Sesión</button>
             </form>
-        </main>
+        </section>
     );
 }
 

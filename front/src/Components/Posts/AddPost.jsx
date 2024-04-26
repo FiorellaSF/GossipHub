@@ -1,51 +1,45 @@
+// AddPost.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const AddPost = ({ onUpdate }) => {
+const AddPost = ({ onSuccess }) => {
   const [description, setDescription] = useState('');
-  const [file, setFile] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('description', description);
-    formData.append('file', file);
-
     try {
-      await axios.post('/api/posts/post', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'auth-token': localStorage.getItem('token') // Asume que el token se guarda en el localStorage
-        },
-      });
-      onUpdate(); // Llama a la función onUpdate para actualizar la lista de posts
-    } catch (error) {
-      console.error('Error adding post:', error);
+      const token = localStorage.getItem('token');
+      await axios.post(
+        'http://localhost:5000/posts/post',
+        { description },
+        {
+          headers: {
+            'auth-token': token,
+          },
+        }
+      );
+      onSuccess(); // Llama a onSuccess para actualizar los posts en el componente Profile
+    } catch (err) {
+      setError(err.response ? err.response.data.message : 'Error de conexión');
     }
   };
 
   return (
     <div>
-      <h2>Add New Post</h2>
+      <h2>Crear un nuevo post</h2>
+      {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Description:</label>
-          <textarea
+          <label>Descripción:</label>
+          <input
+            type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
-          ></textarea>
-        </div>
-        <div>
-          <label>Image:</label>
-          <input
-            type="file"
-            onChange={(e) => setFile(e.target.files[0])}
-            required
           />
         </div>
-        <button type="submit">Add Post</button>
+        <button type="submit">Crear Post</button>
       </form>
     </div>
   );
