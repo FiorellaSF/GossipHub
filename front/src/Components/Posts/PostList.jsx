@@ -26,11 +26,9 @@ const PostList = () => {
       <img 
         src={user.profileImage || 'default-image-url.jpg'} 
         alt={user.uname}
-        style={{ borderRadius: '50%', width: '50px', height: '50px' }}
       />
     );
   };
-
   if (loading) {
     return <p>Loading...</p>;
   }

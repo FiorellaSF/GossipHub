@@ -35,11 +35,13 @@ export const getSinglePost = async (req, res) => {
 //CREATES A POST
 export const createPost = async (req, res) => {
   const  description  = req.body;
+  const image  = req.body;
 
   try {
 
     const post = new Post(
-      description
+      description,
+      image
     );
 
    const newPost = await post.save();
@@ -113,9 +115,7 @@ export const deletePost = async (req, res) => {
     if (post.postedBy.toString() !== userId.toString()) {
       return res.status(403).json({ message: 'Permission denied' });
     }
-
-    // Aquí puedes agregar el código para eliminar el archivo si aún lo necesitas
-    // por ejemplo, si tienes el fileId y fileName en el post.
+z
 
     await Post.deleteOne({_id: id});
 

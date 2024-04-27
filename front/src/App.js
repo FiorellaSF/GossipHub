@@ -4,6 +4,7 @@ import Register from './Pages/Register/register.jsx';
 import Home from './Pages/Home/home.jsx';
 import Profile from './Pages/Profile/profile.jsx';
 import Login from './Pages/Login/login.jsx';
+import AdminPanel from './Pages/Admin/adminPanel.jsx';
  
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             <Route path="/Register" element={<Register />} />
             <Route path="/Login" element={<Login />} />
             <Route path="/Profile" element={<Profile />} />
+            <Route path="/Admin" element={<AdminPanel />} />
           </Routes>
 
         </BrowserRouter>

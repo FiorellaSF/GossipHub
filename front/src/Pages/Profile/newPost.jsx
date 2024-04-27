@@ -1,9 +1,10 @@
-// AddPost.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
+import './newPost.css'
 
-const AddPost = ({ onSuccess }) => {
+const NewPost = ({ onSuccess }) => {
   const [description, setDescription] = useState('');
+  const [image, setImage] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
@@ -11,8 +12,9 @@ const AddPost = ({ onSuccess }) => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/posts/post',
+        'http://localhost:5000/post/post',
         { description },
+        { image },
         {
           headers: {
             'auth-token': token,
@@ -45,4 +47,4 @@ const AddPost = ({ onSuccess }) => {
   );
 };
 
-export default AddPost;
+export default NewPost;

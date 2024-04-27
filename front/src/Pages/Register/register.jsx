@@ -9,7 +9,13 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState(null);
+  const [passwordEntered, setPasswordEntered] = useState(false); // Nuevo estado
   const navigate = useNavigate();
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    setPasswordEntered(true); // Marcar como verdadero cuando se ingrese algo en la contraseña
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +23,19 @@ const Register = () => {
     // Verificar si las contraseñas coinciden
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden');
+      return;
+    }
+
+    // Validación de los campos del formulario
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const nameRegex = /^[a-zA-Z]+$/;
+
+    if (!emailRegex.test(email) || email.length > 100) {
+      setError('Por favor, introduce un correo electrónico válido.');
+      return;
+    }
+    if (!nameRegex.test(uname) || uname.length > 80) {
+      setError('El nombre de usuario sólo debe contener letras.');
       return;
     }
 
@@ -71,20 +90,22 @@ const Register = () => {
                 type="password"
                 name="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handlePasswordChange} // Utiliza el nuevo manejador de cambio de contraseña
                 required
               />
             </div>
-            <div>
-              <label>Confirmar Contraseña:</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </div>
+            {passwordEntered && ( // Renderiza el campo de confirmar contraseña solo si algo se ha ingresado en el campo de contraseña
+              <div>
+                <label>Confirmar Contraseña:</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
+            )}
             <button type="submit" className="btn-submit">
               Únete!
             </button>

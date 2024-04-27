@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './UserProfile.css';
+import './UserInfo.css';
 
-const UserProfile = () => {
+const UserInfo = () => {
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
@@ -41,4 +41,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default UserInfo;
