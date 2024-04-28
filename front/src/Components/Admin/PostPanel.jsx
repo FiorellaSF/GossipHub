@@ -86,7 +86,8 @@ const PostPanel = () => {
   };
 
   return (
-    <main>
+    <section>
+         <h1>Post Panel</h1>
       <nav>
         <button
           onClick={() => handleTabChange('text')}
@@ -148,7 +149,7 @@ const PostPanel = () => {
       {editModalOpen && (
         <EditPostModal post={editedPost} onSave={handleSaveChanges} onClose={handleCloseModal} />
       )}
-    </main>
+    </section>
   );
 };
 

@@ -2,9 +2,15 @@ import rateLimit from 'express-rate-limit';
 
 // Middleware para limitar las solicitudes por IP
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 5, // 5 intentos de inicio de sesión permitidos por IP
+  windowMs: 15 * 60 * 1000,
+  max: 5,
   message: 'Demasiados intentos de inicio de sesión, por favor intenta de nuevo más tarde.',
 });
 
-export default limiter;
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, 
+  max: 2, 
+  message: 'Demasiados intentos de inicio de sesión, por favor intenta de nuevo más tarde.',
+});
+
+export { limiter, loginLimiter };

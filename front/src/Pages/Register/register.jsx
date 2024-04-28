@@ -120,10 +120,10 @@ const Register = () => {
                 />
               </div>
             )}
-                 {/* <ReCAPTCHA
+                 <ReCAPTCHA
             sitekey="6Le2UMkpAAAAABAFLn4FwYWOZHi3nlR7BSxepYDz"
             onChange={handleCaptchaChange}
-          /> */}
+          />
             <button type="submit" className="btn-submit">
               Únete!
             </button>

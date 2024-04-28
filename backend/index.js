@@ -5,7 +5,6 @@ import cors from 'cors';
 import authRoutes from './Routes/Auth.routes.js'; 
 import usersRoute from './Routes/User.routes.js';
 import postsRoutes from './Routes/Posts.routes.js';
-import limiter from './Middlewares/rateLimit.middleware.js';
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ app.use(express.json());
 // Middleware para permitir solicitudes de diferentes orígenes
 app.use(cors());
 // Rutas de autenticación
-app.use('/auth', limiter, authRoutes);
+app.use('/auth', authRoutes);
 app.use('/user', usersRoute)
 app.use('/post', postsRoutes)
 

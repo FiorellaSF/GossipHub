@@ -10,26 +10,19 @@ export const showAllUsers = async(req,res) => {
 
 }
 
-// Controlador para obtener los datos del usuario por su nombre de usuario
-export const getSingleUser = async (req, res) => {
-  try {
-    const dataUser = req.params;
-    
-    const user = await User.findOne({ dataUser });
-
-    if (!user) {
-      return res.status(404).json({ message: "Usuario no encontrado" });
+export const getOneUser = async(req, res) => {
+    const {id}= req.params;
+    try {
+        const userAlone = await User.findById({_id:id})
+        if (!userAlone) {
+            return res.status(404).json({ message: "El usuario no fue encontrado" });
+        }
+        
+        res.status(200).json({ user: userAlone});
+    } catch (error) {
+        res.status(500).json({message:"el id no existe", error})
     }
-
-    // Si se encuentra al usuario, devuelve sus datos
-    res.status(200).json(user);
-  } catch (error) {
-    // Si ocurre algún error, devuelve un error 500
-    console.error("Error al obtener los datos del usuario:", error);
-    res.status(500).json({ message: "Error interno del servidor" });
-  }
-};
-
+}
 
 export const updateUser = async(req,res) => {
     const id = req.params.id

@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
             trim: true,
             lowercase: true
         },
-        nlastName: {
+        lastName: {
             type: String,
             trim: true,
             lowercase: true
