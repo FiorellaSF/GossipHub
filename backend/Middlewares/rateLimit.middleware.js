@@ -1,19 +1,10 @@
 import rateLimit from 'express-rate-limit';
-import redis from 'redis';
-import redisStore from 'rate-limit-redis';
 
-const redisClient = redis.createClient({
-  host: 'localhost',
-  port: 6379,
-});
-
+// Middleware para limitar las solicitudes por IP
 const limiter = rateLimit({
-  store: new redisStore({
-    client: redisClient,
-  }),
   windowMs: 15 * 60 * 1000, // 15 minutos
-  max: 2, // Límite de 2 peticiones por ventana
-  message: 'Too many requests from this IP, please try again later',
+  max: 5, // 5 intentos de inicio de sesión permitidos por IP
+  message: 'Demasiados intentos de inicio de sesión, por favor intenta de nuevo más tarde.',
 });
 
 export default limiter;
