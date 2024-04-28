@@ -9,10 +9,11 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background-color: #ffffff;;
+    
 }
 .nav-logo img{
     width: 150px;
+    color: #ffffff;
 }
 /* .nav-logo p {
     color: #ffffff;

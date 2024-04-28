@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './login.css';
+import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
     const [uname, setUname] = useState('');  
@@ -21,7 +22,19 @@ const Login = () => {
             // Guardar token en localStorage o cookies
             localStorage.setItem('token', response.data.token);
 
-            navigate('/profile');  
+            // Decodificar el token para obtener el rol
+            const decodedToken = jwtDecode(response.data.token);
+            const role = decodedToken.role;
+
+            // Redirigir según el rol
+            if (role === 'user') {
+                navigate('/profile');
+            } else if (role === 'admin') {
+                navigate('/admin');
+            } else {
+                // En caso de que el rol no esté definido, maneja la redirección como desees
+                navigate('/'); // Redirige a una página predeterminada en caso de error
+            }
         } catch (err) {
             setError(err.response ? err.response.data.message : 'Error de conexión');
         }

@@ -1,29 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import'./adminPanel.css'
+import { jwtDecode } from "jwt-decode";
+import './adminPanel.css';
 import PostPanel from '../../Components/Admin/PostPanel.jsx';
 import UserPanel from '../../Components/Admin/UserPanel.jsx';
-
 
 const AdminPanel = () => {
   const navigate = useNavigate();
 
-  // Verifica si el usuario es administrador
-//   const isUserAdmin = isAdmin();
+  useEffect(() => {
+    const token = localStorage.getItem('token');
 
-  // Si el usuario no es administrador, navega a la página de error de acceso
-//   if (!isUserAdmin) {
-//     navigate('/access-denied');
-//     return null;
-//   }
+    if (token) {
+      const decodedToken = jwtDecode(token);
 
-  // Si el usuario es administrador, muestra el panel de administrador
+      if (decodedToken.role !== 'admin') {
+        navigate('/AccessDenied');
+      }
+    } else {
+      // Si no hay token, redirigir al usuario al inicio de sesión
+      navigate('/login');
+    }
+  }, [navigate]);
+
   return (
     <div>
       <h1>Panel de Administrador</h1>
       <PostPanel />
       <UserPanel />
-
     </div>
   );
 };

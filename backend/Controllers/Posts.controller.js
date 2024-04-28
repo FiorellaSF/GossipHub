@@ -88,6 +88,7 @@ export const imageUpdate = async(req, res) => {
       return res.status(403).json({ message: 'Permission denied or Post not found' });
     }
     
+    imageUpdate.description =fileData.description;
     imageUpdate.image = fileData.url;
     imageUpdate.fileId = fileData.fileId;
     imageUpdate.fileName = fileData.fileOriginalName;
@@ -115,7 +116,6 @@ export const deletePost = async (req, res) => {
     if (post.postedBy.toString() !== userId.toString()) {
       return res.status(403).json({ message: 'Permission denied' });
     }
-z
 
     await Post.deleteOne({_id: id});
 

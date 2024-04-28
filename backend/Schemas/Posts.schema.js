@@ -4,7 +4,7 @@ const {ObjectId} = mongoose.Schema.Types
 
 const postSchema = mongoose.Schema(
     {
-        description: { type: String, required: true },
+        description: { type: String },
         image: { type: String },
         // fileId: { type:String },
         // fileName: { type:String },

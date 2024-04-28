@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './register.css';
+import ReCAPTCHA from "react-google-recaptcha";   
+   {/* -_- ---------- ReCAPTCHA ----------- -_- */}
 
 const Register = () => {
   const [uname, setUname] = useState('');
@@ -11,6 +13,7 @@ const Register = () => {
   const [error, setError] = useState(null);
   const [passwordEntered, setPasswordEntered] = useState(false); // Nuevo estado
   const navigate = useNavigate();
+  const [captchaToken, setCaptchaToken] = useState("");
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
@@ -39,6 +42,12 @@ const Register = () => {
       return;
     }
 
+    // Verificar si el campo de confirmar contraseña ha sido completado
+    if (passwordEntered && confirmPassword === '') {
+      setError('Por favor, confirma tu contraseña.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/auth/register', {
         uname,
@@ -54,6 +63,11 @@ const Register = () => {
     } catch (err) {
       setError(err.response ? err.response.data.message : 'Error de conexión');
     }
+  };
+
+   // -- ------------- Función para manejar el reCAPTCHA ------------- --
+   const handleCaptchaChange = (token) => {
+    setCaptchaToken(token);
   };
 
   return (
@@ -106,6 +120,10 @@ const Register = () => {
                 />
               </div>
             )}
+                 {/* <ReCAPTCHA
+            sitekey="6Le2UMkpAAAAABAFLn4FwYWOZHi3nlR7BSxepYDz"
+            onChange={handleCaptchaChange}
+          /> */}
             <button type="submit" className="btn-submit">
               Únete!
             </button>

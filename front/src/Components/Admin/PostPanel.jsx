@@ -63,12 +63,18 @@ const PostPanel = () => {
     setEditModalOpen(false);
   };
 
-  const handleSaveChanges = async (postId, newDescription) => {
+  const handleSaveChanges = async (postId, newDescription, newImage) => {
     try {
-      await axios.put(`http://localhost:5000/post/update/${postId}`, { description: newDescription });
+      if (newImage) {
+        // Update both image and description
+        await axios.put(`http://localhost:5000/post/image/update/${postId}`, { description: newDescription, image: newImage });
+      } else {
+        // Update only description
+        await axios.put(`http://localhost:5000/post/update/${postId}`, { description: newDescription });
+      }
       const updatedPosts = posts.map(post => {
         if (post._id === postId) {
-          return { ...post, description: newDescription };
+          return { ...post, description: newDescription, image: newImage };
         }
         return post;
       });
