@@ -87,7 +87,7 @@ const PostPanel = () => {
 
   return (
     <section>
-         <h1>Post Panel</h1>
+      <h1>Post Panel</h1>
       <nav>
         <button
           onClick={() => handleTabChange('text')}

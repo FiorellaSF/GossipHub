@@ -3,20 +3,35 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './login.css';
 import { jwtDecode } from "jwt-decode";
+import { sanitize } from 'dompurify'; // Importa la biblioteca de sanitización
 
 const Login = () => {
     const [uname, setUname] = useState('');  
     const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Sanitiza los campos de entrada para evitar XSS
+        const sanitizedUname = sanitize(uname);
+        const sanitizedPassword = sanitize(password);
+        const sanitizedName = sanitize(name);
+        const sanitizedLastName = sanitize(lastName);
         
+        // Verifica si los campos ocultos están completos
+        if (sanitizedName.trim() !== '' || sanitizedLastName.trim() !== '') {
+            setError('Campos ocultos completados');
+            return;
+        }
+
         try {
             const response = await axios.post('http://localhost:5000/auth/login', {
-                uname,  
-                password
+                uname: sanitizedUname,  
+                password: sanitizedPassword
             });
 
             // Guardar token en localStorage o cookies
@@ -26,7 +41,6 @@ const Login = () => {
             const decodedToken = jwtDecode(response.data.token);
             const role = decodedToken.role;
 
-            // Redirigir según el rol
             if (role === 'user') {
                 navigate('/profile');
             } else if (role === 'admin') {
@@ -68,6 +82,28 @@ const Login = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required 
+                    />
+                </div>
+                <div className="formgroup">
+                    <label htmlFor="name">Nombre</label>
+                    <input 
+                        type="text" 
+                        id="name" 
+                        name="name" 
+                        placeholder="Nombre"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className="formgroup">
+                    <label htmlFor="lastName">Apellidos</label>
+                    <input 
+                        type="text" 
+                        id="lastName" 
+                        name="lastName" 
+                        placeholder="Apellidos" 
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
                     />
                 </div>
                 <div>
