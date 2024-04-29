@@ -14,7 +14,7 @@ const PostPanel = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/post');
+        const response = await axios.get('https://gossiphub-1.onrender.com/post');
         setPosts(response.data);
         setLoading(false);
       } catch (error) {
@@ -46,7 +46,7 @@ const PostPanel = () => {
 
   const handleDeletePost = async (postId) => {
     try {
-      await axios.delete(`http://localhost:5000/post/delete/${postId}`);
+      await axios.delete(`https://gossiphub-1.onrender.com/post/delete/${postId}`);
       const updatedPosts = posts.filter(post => post._id !== postId);
       setPosts(updatedPosts);
     } catch (error) {
@@ -67,10 +67,10 @@ const PostPanel = () => {
     try {
       if (newImage) {
         // Update both image and description
-        await axios.put(`http://localhost:5000/post/image/update/${postId}`, { description: newDescription, image: newImage });
+        await axios.put(`https://gossiphub-1.onrender.com/post/image/update/${postId}`, { description: newDescription, image: newImage });
       } else {
         // Update only description
-        await axios.put(`http://localhost:5000/post/update/${postId}`, { description: newDescription });
+        await axios.put(`https://gossiphub-1.onrender.com/post/update/${postId}`, { description: newDescription });
       }
       const updatedPosts = posts.map(post => {
         if (post._id === postId) {

@@ -11,7 +11,7 @@ function UserPosts() {
     // Función asíncrona para obtener los posts del usuario
     const fetchPosts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/post/user/:postedBy'); // Cambia la URL según la configuración de tu servidor
+        const response = await axios.get('https://gossiphub-1.onrender.com/post/user/:postedBy'); // Cambia la URL según la configuración de tu servidor
         setPosts(response.data); // Actualiza el estado con los posts recibidos
         setLoading(false); // Indica que se han cargado los datos
       } catch (error) {

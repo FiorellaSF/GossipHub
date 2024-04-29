@@ -12,7 +12,7 @@ const NewPost = ({ onSuccess }) => {
     try {
       const token = localStorage.getItem('token');
       await axios.post(
-        'http://localhost:5000/post/post',
+        'https://gossiphub-1.onrender.com/post/post',
         { description },
         { image },
         {

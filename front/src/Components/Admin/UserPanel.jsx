@@ -11,7 +11,7 @@ function UserPanel() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const response = await axios.get('http://localhost:5000/user/users');
+        const response = await axios.get('https://gossiphub-1.onrender.com/user/users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);

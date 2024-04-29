@@ -19,7 +19,7 @@ function EditUserModal({ user, onClose }) {
 
   const handleSaveChanges = async () => {
     try {
-      await axios.put(`http://localhost:5000/user/users/${user._id}`, editedData);
+      await axios.put(`https://gossiphub-1.onrender.com/user/users/${user._id}`, editedData);
       onClose(); // Cerrar el modal después de guardar cambios
     } catch (error) {
       console.error('Error updating user:', error);
@@ -28,7 +28,7 @@ function EditUserModal({ user, onClose }) {
 
   const handleDeleteUser = async () => {
     try {
-      await axios.delete(`http://localhost:5000/user/users/${user._id}`);
+      await axios.delete(`https://gossiphub-1.onrender.com/user/users/${user._id}`);
       onClose(); // Cerrar el modal después de eliminar el usuario
     } catch (error) {
       console.error('Error deleting user:', error);

@@ -29,7 +29,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', {
+            const response = await axios.post('https://gossiphub-1.onrender.com/auth/login', {
                 uname: sanitizedUname,  
                 password: sanitizedPassword
             });
