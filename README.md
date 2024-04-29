@@ -21,17 +21,30 @@ El objetivo del proyecto es crear una aplicación web que integra tanto el desar
 
 ## Instalación:
 
+#### Lo primero que debemos hacer es clonar el repositorio:
+```bash
+    git clone 'https://github.com/FiorellaSF/GossipHub.git'
+```
+
 ### Back-end:
 1. Acceder a la carpeta 'backend'
- **(cd backend)**
+```bash
+    cd backend
+```
 2. Iniciar la aplicación
-**nodemon**
+```bash
+    nodemon
+```
 
 ### Fron-end: 
 1. Acceder a la carpeta 'front'
- **(cd front)**
+```bash
+    cd front
+```
 2. Iniciar la aplicación
-**npm start**
+```bash
+    npm start
+```
 
 ## Tecnologías Utilizadas:
 
@@ -53,3 +66,38 @@ El objetivo del proyecto es crear una aplicación web que integra tanto el desar
 - **jwt-decode**: Librería para decodificar tokens JWT en el navegador.
 - **dompurify**: Biblioteca para limpiar HTML utilizando un enfoque seguro para evitar ataques XSS.
 - **xss**: Módulo para evitar ataques XSS en aplicaciones web.
+
+## Autoría 
+
+## Análisis de Seguridad del Servidor
+
+### Ping y Escaneo de Puertos
+
+![Texto alternativo](./readmeImages/nmap.jpg)
+
+
+El primer comando ejecutado fue `ping gossiphub-2.onrender.com`, que muestra la respuesta del servidor de nombres DNS al intentar hacer ping al dominio "gossiphub-2.onrender.com". La dirección IP resuelta para este dominio es 216.24.57.4, y el tiempo de ida y vuelta (RTT) para los paquetes ICMP es en su mayoría bastante bajo, oscilando entre 10.3 ms y 52.1 ms.
+
+El segundo comando fue `nmap 216.24.57.4`, que realiza un escaneo de puertos en la dirección IP 216.24.57.4. El escaneo revela que los puertos TCP 80 (HTTP), 443 (HTTPS), 8080 (HTTP proxy) y 8443 (HTTPS alternativo) están abiertos en el servidor.
+
+### Registro de Actividad del Servidor Web
+
+![Registro de Actividad del Servidor Web](./readmeImages/OSWAPattack.jpg)
+
+En esta imagen podemos ver un registro de actividad de servidor web durante un análisis de seguridad. El registro muestra intentos de acceso a archivos sensibles, solicitudes POST con parámetros potencialmente maliciosos y redirecciones. Se observa una combinación de códigos de estado HTTP, incluidos 404 (Not Found), 301 (Moved Permanently) y 200 (OK), junto con detalles de las solicitudes y respuestas.
+
+## Análisis de Ejecución de SQLMap
+
+![Texto alternativo](./readmeImages/sqlmap.jpg)
+
+El análisis revela lo siguiente:
+
+- **Inicio de la ejecución:** El comando comenzó a las 15:44:30 el 29 de abril de 2024.
+- **Pruebas de conexión:** Se realizó una prueba para verificar la conexión con la URL de destino.
+- **Detección de WAF/IPS:** Se realizó una verificación para determinar si el objetivo está protegido por algún tipo de WAF (Firewall de Aplicaciones Web) o IPS (Sistema de Prevención de Intrusiones).
+- **Estabilidad del contenido:** Se verificó la estabilidad del contenido de la URL de destino.
+- **Inyección de SQL:** Se iniciaron pruebas exhaustivas de inyección de SQL en el parámetro 'User-Agent' con un nivel de riesgo de 3 y un nivel de profundidad de 5.
+- **Resultados:** Se detectó que el parámetro 'User-Agent' no parece ser dinámico y no es inyectable. Además, se identificó un WAF/IPS como 'CloudFlare' que puede estar interfiriendo con las pruebas de inyección de SQL.
+
+El comando `sqlmap` está diseñado para ayudar en la identificación y explotación de vulnerabilidades de inyección de SQL en aplicaciones web. Sin embargo, es importante tener en cuenta que el uso de esta herramienta para atacar objetivos sin consentimiento mutuo previo es ilegal y puede resultar en consecuencias legales. Los usuarios deben cumplir con todas las leyes y regulaciones aplicables al utilizar `sqlmap`.
+
